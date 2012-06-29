@@ -7,10 +7,6 @@ if Meteor.is_client
     , (error) ->
       console.log error
 
-  Template.hello.events =
-    'click input': ->
-      console?.log "You pressed the button"
-
 if Meteor.is_server
   Meteor.startup ->
     ;
