@@ -1,10 +1,11 @@
+Photos = new Meteor.Collection 'photos'
+
 localMediaStream = null
 
 # TODO get image sized correctly. Apply current filter to the image.
 snapshot = ->
   video = $('video')
   canvas = $('canvas').attr('width', video.width()).attr('height', video.height()).get(0)
-
 
   ctx = canvas.getContext('2d')
 
@@ -13,7 +14,9 @@ snapshot = ->
 
     ctx.drawImage(video.get(0), 0, 0)
 
-    $('img').attr 'src', canvas.toDataURL('image/webp')
+    Photos.insert
+      src: canvas.toDataURL('image/webp')
+      filter: video.attr('class')
 
 index = 0
 filters = ['grayscale', 'sepia', 'blur']#, 'brightness', 'contrast', 'hue-rotate', 'hue-rotate2', 'hue-rotate3', 'saturate', 'invert', '']
@@ -27,10 +30,20 @@ changeFilter = (e) ->
     $(target).attr('class', effect)
 
 if Meteor.is_client
+  Template.gallery.photos = ->
+    output = ""
+
+    Photos.find().forEach (photo) ->
+      output += "<img class='preview #{photo.filter}' src='#{photo.src}' />"
+
+    output
+
   Meteor.startup ->
+    $('.take_photo').on 'click', (e) ->
+      snapshot(e)
+
     $('video').on 'click', (e) ->
       changeFilter(e)
-      snapshot(e)
 
     video = $('video').get(0)
     navigator.webkitGetUserMedia {video: true}

@@ -8,11 +8,14 @@
 </body>
 
 <template name="video">
-  <h1>Welcome to Wilkes!</h1>
+  <h1 class='title'>Welcome to Wilkes!</h1>
   <video autoplay></video>
+  <div class='take_photo'></div>
 </template>
 
 <template name='gallery'>
-  <img src="" />
+  <div class='previews'>
+    {{{photos}}}
+  </div>
   <canvas></canvas>
 </template>
