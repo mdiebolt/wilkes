@@ -1,0 +1,7 @@
+.saturate {
+  -webkit-filter: saturate(5);
+}
+
+.invert {
+  -webkit-filter: invert(100%);
+}

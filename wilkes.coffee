@@ -19,7 +19,7 @@ snapshot = ->
       filter: video.attr('class')
 
 index = 0
-filters = ['grayscale', 'sepia', 'blur']#, 'brightness', 'contrast', 'hue-rotate', 'hue-rotate2', 'hue-rotate3', 'saturate', 'invert', '']
+filters = ['grayscale', 'sepia', 'blur', 'brightness', 'contrast', 'hue-rotate', 'hue-rotate2', 'hue-rotate3', 'saturate', 'invert', '']
 
 changeFilter = (e) ->
   target = e.target
