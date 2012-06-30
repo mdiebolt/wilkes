@@ -30,6 +30,20 @@ changeFilter = (e) ->
     $(target).attr('class', effect)
 
 if Meteor.is_client
+  Template.video.video = ->
+    if navigator.webkitGetUserMedia
+      "<video autoplay></video><div class='take_photo'></div>"
+    else
+      """
+        <p>Looks like the camera isn't enabled. We can fix this.</p>
+        <ul>
+          <li>Use Chrome.</li>
+          <li>Navigate to "chrome://flags".
+          <li>Switch on the flags: 'Enable Media Source API on video elements.' and 'Enable MediaStream.'</li>
+          <li>Restart your browser.</li>
+        </ul>
+      """
+
   Template.gallery.photos = ->
     output = ""
 
@@ -46,7 +60,7 @@ if Meteor.is_client
       changeFilter(e)
 
     video = $('video').get(0)
-    navigator.webkitGetUserMedia {video: true}
+    navigator.webkitGetUserMedia? {video: true}
     , (stream) ->
       video.src = webkitURL.createObjectURL(stream)
       localMediaStream = stream
