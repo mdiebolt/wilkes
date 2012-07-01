@@ -19,7 +19,7 @@ snapshot = ->
       filter: video.attr('class')
 
 index = 0
-filters = ['grayscale', 'sepia', 'blur', 'brightness', 'contrast', 'hue-rotate', 'hue-rotate2', 'hue-rotate3', 'saturate', 'invert', '']
+filters = ['grayscale', 'sepia', 'blur', 'brightness', 'contrast', 'hue-rotate', 'hue-rotate2', 'hue-rotate3', 'saturate', 'invert']
 
 changeFilter = (e) ->
   target = e.target
@@ -59,19 +59,23 @@ if Meteor.is_client
   Meteor.startup ->
     $(document).on 'click', '.overlay', ->
       $('.overlay').hide()
-      $('.overlay img').remove()
+      $('.overlay div').remove()
 
     $(document).on 'click', '.preview', ->
       $('.overlay').show()
-      $('.overlay img').remove()
+      $('.overlay div').remove()
 
       src = $(this).attr('src')
+
+      div = $ '<div>'
 
       img = $ '<img>'
         src: src
         class: $(this).attr('class').replace(/preview/g, '')
 
-      $('.overlay').append(img)
+      div.append(img)
+
+      $('.overlay').append(div)
 
     $('.take_photo').on 'click', (e) ->
       snapshot(e)

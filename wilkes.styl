@@ -1,6 +1,8 @@
+$width = 645px
+
 body
   margin: auto
-  width: 645px
+  width: $width
 
 .overlay
   background-color: rgba(0, 0, 0, 0.75)
@@ -12,10 +14,13 @@ body
   height: 100%
   z-index: 500
 
+  div
+    margin: auto
+    margin-top: 43px
+    width: $width
+
   img
-    border: 1px solid rgba(0, 0, 0, 0.3)
-    box-shadow: rgba(0, 0, 0, 0.3) 0 0 5
-    padding: 15px
+    box-shadow: white 0 0 15px
     z-index: 501
 
 .title
@@ -28,6 +33,7 @@ body
   width: 645px
   overflow: auto
   white-space: nowrap
+  -webkit-user-select: none
 
 canvas
   border-radius: 5px
