@@ -3,13 +3,15 @@
 </head>
 
 <body>
+  <div class='overlay'></div>
   {{> video}}
-  {{> gallery}}
 </body>
 
 <template name="video">
-  <h1 class='title'>Welcome to Wilkes!</h1>
+  <h1 class='title'>Welcome to Wilkes</h1>
   {{{video}}}
+  {{> gallery}}
+  {{{button}}}
 </template>
 
 <template name='gallery'>

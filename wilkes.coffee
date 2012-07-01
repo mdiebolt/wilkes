@@ -30,9 +30,13 @@ changeFilter = (e) ->
     $(target).attr('class', effect)
 
 if Meteor.is_client
+  Template.video.button = ->
+    if navigator.webkitGetUserMedia
+      "<div class='take_photo'></div>"
+
   Template.video.video = ->
     if navigator.webkitGetUserMedia
-      "<video autoplay></video><div class='take_photo'></div>"
+      "<video autoplay></video>"
     else
       """
         <p>Looks like the camera isn't enabled. We can fix this.</p>
@@ -53,6 +57,22 @@ if Meteor.is_client
     output
 
   Meteor.startup ->
+    $(document).on 'click', '.overlay', ->
+      $('.overlay').hide()
+      $('.overlay img').remove()
+
+    $(document).on 'click', '.preview', ->
+      $('.overlay').show()
+      $('.overlay img').remove()
+
+      src = $(this).attr('src')
+
+      img = $ '<img>'
+        src: src
+        class: $(this).attr('class').replace(/preview/g, '')
+
+      $('.overlay').append(img)
+
     $('.take_photo').on 'click', (e) ->
       snapshot(e)
 
